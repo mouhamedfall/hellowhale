@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: jenkins-orchestrator
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      securityContext:
+        runAsUser: 0
+      containers:
+      - image: jenkins:latest
+        name: jenkins-orchestrator
+        ports:
+        - containerPort: 50000
+          name: agent-request
+        - containerPort: 8080
+          name: webui
+      #   volumeMounts:
+      #   - name: jenkins-persistent-storage
+      #     mountPath: /var/jenkins_home/
+      # volumes:
+      # - name: jenkins-persistent-storage
+      #   persistentVolumeClaim:
+      #     claimName: jenkins-home-claim

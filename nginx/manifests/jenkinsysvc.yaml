@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-orchestrator
+spec:
+  ports:
+  - port: 8080
+    nodePort: 32647
+    name: webui
+  - port: 50000
+    name: agent-request
+  selector:
+    app: jenkins
+  type: NodePort
