@@ -1,0 +1,41 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     name: node
+#     role: service
+#   name: hellowhalesvc
+# spec:
+#   type: "NodePort"
+#   ports:
+#     - port: 81
+#       #targetPort: 3000
+#       nodePort: 31000
+#   selector:
+#     hellowhalesvc: "true"
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hellowhale-svc
+  labels:
+    name: hellowhale
+    app: hellowhale
+  #namespace: kube-system    
+spec:
+  type: NodePort
+  ports:
+    - port: 8181
+      protocol: TCP
+      #targetPort: 3128
+      nodePort: 31000
+  selector:
+    name: hellowhale
+    app: hellowhale
+    
+
+
+
